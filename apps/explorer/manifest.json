@@ -1,0 +1,28 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.explorer",
+  "name": "Explorer",
+  "version": "1.0.0",
+  "description": "Wikipedia, dictionary, currency rates, countries and Hacker News: free APIs, no keys, through AntiGem's native network.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#00695C",
+  "background": "background.js",
+  "permissions": {
+    "network": {
+      "hosts": [
+        "en.wikipedia.org",
+        "upload.wikimedia.org",
+        "api.dictionaryapi.dev",
+        "ssl.gstatic.com",
+        "open.er-api.com",
+        "countriesnow.space",
+        "flagcdn.com",
+        "hacker-news.firebaseio.com",
+        "thumb.wikimedia.org"
+      ]
+    },
+    "notifications": true,
+    "background": true
+  }
+}

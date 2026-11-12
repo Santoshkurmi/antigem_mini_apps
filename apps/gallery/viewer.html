@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Viewer</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; color: #fff; overflow: hidden; }
+    #stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; touch-action: pan-y; }
+    #stage img, #stage video { max-width: 100%; max-height: 100%; transition: transform .2s; }
+    #stage.fill img { width: 100%; height: 100%; object-fit: cover; max-width: none; max-height: none; }
+    .bar { position: fixed; left: 0; right: 0; display: flex; align-items: center; gap: 4px; padding: 8px; background: linear-gradient(rgba(0,0,0,.6), transparent); transition: opacity .2s; }
+    .top { top: 0; } .bottom { bottom: 0; background: linear-gradient(transparent, rgba(0,0,0,.7)); justify-content: space-around; }
+    .bar button { background: none; border: 0; color: #fff; font-size: 15px; padding: 10px 12px; border-radius: 20px; }
+    .bar button:active { background: rgba(255,255,255,.15); }
+    .bar button[disabled] { opacity: .35; }
+    #name { flex: 1; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #info { font-size: 12px; opacity: .8; }
+    body.hide-ui .bar { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="stage"></div>
+  <div class="bar top">
+    <button id="back">←</button>
+    <div id="name"><div id="title"></div><div id="info"></div></div>
+  </div>
+  <div class="bar bottom">
+    <button id="share">Share</button>
+    <button id="copy">Save copy</button>
+    <button id="delete">Delete</button>
+  </div>
+  <script src="common.js"></script>
+  <script>
+    const paths = JSON.parse(sessionStorage.getItem('gallery.list') || '[]');
+    let path = AG.page.params.path;
+    let index = Math.max(0, paths.indexOf(path));
+    if (!paths.length) paths.push(path);
+    AG.ui.statusBar({ color: '#000000' });
+
+    async function show() {
+      path = paths[index];
+      const stage = document.getElementById('stage');
+      stage.classList.remove('fill');
+      const src = AG.fs.url(path);
+      stage.replaceChildren(isVideo(path)
+        ? h('video', { src, controls: true, autoplay: true, playsinline: true })
+        : h('img', { src, alt: '' }));
+      document.getElementById('title').textContent = path.split('/').pop();
+      document.getElementById('info').textContent = `${index + 1} / ${paths.length}`;
+      try {
+        const st = await AG.fs.stat(path);
+        if (st) document.getElementById('info').textContent = `${index + 1} / ${paths.length} · ${fmtSize(st.size)} · ${new Date(st.mtime).toLocaleString()}`;
+      } catch (e) { /* stat not allowed: keep counter */ }
+      document.getElementById('delete').disabled = !(await canWrite(path));
+    }
+
+    // tap: toggle fit / fill and the bars; swipe left / right: next / previous
+    let sx = 0, sy = 0, moved = false;
+    const stage = document.getElementById('stage');
+    stage.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; moved = false; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+        moved = true;
+        const next = index + (dx < 0 ? 1 : -1);
+        if (next >= 0 && next < paths.length) { index = next; AG.device.haptic('selection'); show(); }
+      }
+    });
+    stage.addEventListener('click', () => {
+      if (moved || isVideo(path)) return;
+      stage.classList.toggle('fill');
+      document.body.classList.toggle('hide-ui', stage.classList.contains('fill'));
+    });
+
+    document.getElementById('back').onclick = () => AG.nav.back();
+    // share the photo itself: to another mini app (e.g. Pocket Notes) or, with "Other apps…", to Android apps
+    document.getElementById('share').onclick = () => AG.intent.send({ action: 'share', path, title: path.split('/').pop() }).catch(e => AG.ui.toast(e.message));
+    document.getElementById('copy').onclick = async () => {
+      try {
+        const blob = await (await fetch(AG.fs.url(path))).blob();
+        await AG.fs.mkdir('/sdcard/Pictures/AntiGem');
+        const name = path.split('/').pop().replace(/(\.[^.]+)$/, '_copy$1');
+        await AG.fs.write('/sdcard/Pictures/AntiGem/' + name, blob);
+        AG.device.haptic('success');
+        AG.ui.toast('Saved to Pictures/AntiGem');
+      } catch (e) { AG.ui.toast(e.message); }
+    };
+    document.getElementById('delete').onclick = async () => {
+      const ok = await AG.ui.confirm({ title: 'Delete this file?', message: path.split('/').pop(), ok: 'Delete', destructive: true });
+      if (!ok) return;
+      try {
+        await AG.fs.delete(path);
+        AG.device.haptic('warning');
+        paths.splice(index, 1);
+        sessionStorage.setItem('gallery.list', JSON.stringify(paths));
+        if (!paths.length) return AG.nav.back();
+        index = Math.min(index, paths.length - 1);
+        show();
+      } catch (e) { AG.ui.toast(e.message); }
+    };
+    show();
+  </script>
+</body>
+</html>

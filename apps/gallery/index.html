@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gallery</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <h1 class="ag-appbar-title" id="title">Photos</h1>
+    <span class="ag-grow"></span>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="refresh" aria-label="Refresh">↻</button>
+    </div>
+  </header>
+  <main class="ag-content">
+    <section class="tab" data-tab="photos">
+      <div class="ag-empty" id="denied" hidden>
+        <div class="ag-empty-icon">🔒</div>
+        <h2 class="ag-empty-title">No access to your photos</h2>
+        <p>Gallery needs to read DCIM and Pictures.</p>
+        <button class="ag-btn" id="grant">Grant</button>
+      </div>
+      <p id="crumb"></p>
+      <div id="photos"></div>
+      <div class="ag-empty" id="empty" hidden>
+        <div class="ag-empty-icon">🖼️</div>
+        <h2 class="ag-empty-title">No photos found</h2>
+        <p>Take one with the camera button, or add a folder in Folders.</p>
+      </div>
+    </section>
+    <section class="tab" data-tab="folders" hidden>
+      <ul class="ag-list" id="folder-list"></ul>
+      <button class="ag-btn ag-btn-tonal ag-btn-block" id="pick">Add a folder…</button>
+    </section>
+    <section class="tab" data-tab="stats" hidden>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Library</h2>
+        <p class="ag-card-sub">Counted on background threads (AntiGem.thread).</p>
+        <div id="stats-body"><button class="ag-btn" id="stats-run">Count</button></div>
+      </div>
+    </section>
+  </main>
+  <button class="ag-fab" id="camera" aria-label="Take a photo">📷</button>
+  <input type="file" accept="image/*" capture="environment" id="camera-input" hidden>
+  <nav class="ag-navbar">
+    <button class="ag-navbar-item is-active" data-tab="photos"><span class="ag-navbar-icon">🖼️</span><span class="ag-navbar-label">Photos</span></button>
+    <button class="ag-navbar-item" data-tab="folders"><span class="ag-navbar-icon">📁</span><span class="ag-navbar-label">Folders</span></button>
+    <button class="ag-navbar-item" data-tab="stats"><span class="ag-navbar-icon">📊</span><span class="ag-navbar-label">Stats</span></button>
+  </nav>
+</div>
+<script src="common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

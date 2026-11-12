@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Showcase</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <h1 class="ag-appbar-title" id="title">Storage</h1>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="btn-console" aria-label="Console">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.11 0-2 .9-2 2v12c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.89-2-2-2zm0 14H4V8h16v10zm-2-1h-6v-2h6v2zM7.5 17l-1.41-1.41L8.67 13l-2.59-2.59L7.5 9l4 4-4 4z"/></svg>
+      </button>
+      <button class="ag-btn ag-btn-icon" id="btn-more" aria-label="More">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="ag-content">
+    <!-- ======================= STORAGE ======================= -->
+    <section class="tab" data-tab="storage" data-title="Storage">
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🔢</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">localStorage counter</h2>
+            <p class="ag-card-sub">Saved natively. Survives restarts and stays in sync with every page of this app.</p>
+          </div>
+        </div>
+        <div class="counter">
+          <span class="ag-display" id="counter-value">0</span>
+          <div class="ag-row">
+            <button class="ag-btn ag-btn-icon ag-btn-tonal" id="counter-dec" aria-label="Minus">−</button>
+            <button class="ag-btn ag-btn-icon ag-btn-filled" id="counter-inc" aria-label="Plus">+</button>
+            <button class="ag-btn ag-btn-text" id="counter-reset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🗝️</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">AntiGem.storage</h2>
+            <p class="ag-card-sub">Synchronous key-value store with JSON values.</p>
+          </div>
+        </div>
+        <label class="ag-field"><input class="ag-input" id="kv-name" placeholder=" " autocomplete="off"><span class="ag-label">Your name</span></label>
+        <div class="ag-card-actions">
+          <button class="ag-btn" id="kv-save">Save</button>
+          <button class="ag-btn ag-btn-tonal" id="kv-load">Load</button>
+          <button class="ag-btn ag-btn-outlined" id="kv-keys">List keys</button>
+        </div>
+        <pre class="out" id="kv-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🗃️</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">IndexedDB todos</h2>
+            <p class="ag-card-sub">The raw IndexedDB API, stored in native SQLite. Filters use an index on <code>done</code>.</p>
+          </div>
+        </div>
+        <form class="inline-form" id="todo-form">
+          <label class="ag-field"><input class="ag-input" id="todo-text" placeholder=" " autocomplete="off"><span class="ag-label">New todo</span></label>
+          <button class="ag-btn ag-btn-icon ag-btn-filled" aria-label="Add todo">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          </button>
+        </form>
+        <div class="ag-chips" id="todo-filter">
+          <button class="ag-chip is-selected" data-filter="all">All</button>
+          <button class="ag-chip" data-filter="open">Open</button>
+          <button class="ag-chip" data-filter="done">Done</button>
+          <span class="ag-grow"></span>
+          <span class="ag-badge ag-badge-neutral" id="todo-count">0</span>
+        </div>
+        <ul class="ag-list ag-plain todo-list" id="todo-list"></ul>
+        <pre class="out" id="todo-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">📝</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">App files (data/)</h2>
+            <p class="ag-card-sub">The app's private folder. Always allowed, no permission needed.</p>
+          </div>
+        </div>
+        <label class="ag-field"><textarea class="ag-textarea" id="notes-text" placeholder=" "></textarea><span class="ag-label">data/notes.txt</span></label>
+        <div class="ag-card-actions">
+          <button class="ag-btn" id="fs-write">Save</button>
+          <button class="ag-btn ag-btn-tonal" id="fs-read">Read</button>
+          <button class="ag-btn ag-btn-tonal" id="fs-json">Write JSON</button>
+          <button class="ag-btn ag-btn-outlined" id="fs-list">List data/</button>
+        </div>
+        <pre class="out" id="fs-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">📂</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Folders outside the app</h2>
+            <p class="ag-card-sub">Each folder is its own permission with the access the manifest gives it (Download: read only). You can also pick any folder in AntiGem's file explorer.</p>
+          </div>
+        </div>
+        <div class="ag-card-actions" style="flex-wrap:wrap">
+          <button class="ag-btn" id="dl-list">List Download</button>
+          <button class="ag-btn ag-btn-tonal" id="dl-request">Request access</button>
+          <button class="ag-btn ag-btn-tonal" id="pick-folder">Pick a folder</button>
+          <button class="ag-btn ag-btn-outlined" id="my-folders">My folders</button>
+        </div>
+        <ul class="ag-list ag-plain" id="dl-items"></ul>
+        <pre class="out" id="dl-out" hidden></pre>
+      </div>
+    </section>
+
+    <!-- ======================= NETWORK ======================= -->
+    <section class="tab" data-tab="network" data-title="Network" hidden>
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🐙</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">fetch: GitHub API</h2>
+            <p class="ag-card-sub">Sent natively, so browser CORS rules don't apply.</p>
+          </div>
+        </div>
+        <button class="ag-btn" id="net-github">GET repo info</button>
+        <pre class="out" id="net-github-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">📮</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">POST JSON</h2>
+            <p class="ag-card-sub">httpbin echoes back the body it received.</p>
+          </div>
+        </div>
+        <button class="ag-btn" id="net-post">POST to httpbin</button>
+        <pre class="out" id="net-post-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🏷️</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Custom headers</h2>
+            <p class="ag-card-sub">Headers a browser normally forbids: <code>Origin</code>, <code>User-Agent</code>.</p>
+          </div>
+        </div>
+        <button class="ag-btn" id="net-headers">Send headers</button>
+        <pre class="out" id="net-headers-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">📡</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">XMLHttpRequest</h2>
+            <p class="ag-card-sub">Old-style XHR (what axios uses) goes through the same native path.</p>
+          </div>
+        </div>
+        <button class="ag-btn" id="net-xhr">XHR GET</button>
+        <pre class="out" id="net-xhr-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🔌</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">WebSocket echo</h2>
+            <p class="ag-card-sub"><span class="ws-status" id="ws-status">Disconnected</span></p>
+          </div>
+        </div>
+        <form class="inline-form" id="ws-form">
+          <label class="ag-field"><input class="ag-input" id="ws-text" placeholder=" " autocomplete="off" value="Hello socket 👋"><span class="ag-label">Message</span></label>
+          <button class="ag-btn ag-btn-icon ag-btn-filled" aria-label="Send">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </form>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-tonal" id="ws-connect">Connect</button>
+          <button class="ag-btn ag-btn-outlined" id="ws-close">Close</button>
+        </div>
+        <pre class="out" id="ws-log" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🖼️</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Image from https</h2>
+            <p class="ag-card-sub">A plain <code>&lt;img&gt;</code>, fetched and cached natively.</p>
+          </div>
+        </div>
+        <button class="ag-btn" id="net-image">Load image</button>
+        <img class="preview" id="net-image-el" alt="" hidden>
+        <pre class="out" id="net-image-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🛡️</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Permission checks</h2>
+            <p class="ag-card-sub">example.com isn't in the manifest, so it must be blocked. Localhost port 8080 is allowed. Start a server with <code>python -m http.server 8080</code>.</p>
+          </div>
+        </div>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-tonal" id="net-blocked">Fetch example.com</button>
+          <button class="ag-btn ag-btn-tonal" id="net-local">Fetch 127.0.0.1:8080</button>
+        </div>
+        <pre class="out" id="net-check-out" hidden></pre>
+      </div>
+    </section>
+
+    <!-- ======================= NATIVE ======================= -->
+    <section class="tab" data-tab="native" data-title="Native" hidden>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Web dialogs</h2>
+        <p class="ag-card-sub"><code>alert()</code>, <code>confirm()</code> and <code>prompt()</code> show real native dialogs.</p>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-tonal" id="web-alert">alert()</button>
+          <button class="ag-btn ag-btn-tonal" id="web-confirm">confirm()</button>
+          <button class="ag-btn ag-btn-tonal" id="web-prompt">prompt()</button>
+        </div>
+        <pre class="out" id="web-dialog-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">AntiGem.ui dialogs</h2>
+        <p class="ag-card-sub">Async, themed, with titles and destructive actions.</p>
+        <div class="ag-row">
+          <button class="ag-btn" id="ui-alert">Alert</button>
+          <button class="ag-btn ag-btn-danger" id="ui-confirm">Confirm</button>
+          <button class="ag-btn ag-btn-tonal" id="ui-prompt">Prompt</button>
+          <button class="ag-btn ag-btn-outlined" id="ui-sheet">Bottom sheet</button>
+        </div>
+        <pre class="out" id="ui-dialog-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Pickers</h2>
+        <p class="ag-card-sub">The system date and time pickers.</p>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-tonal" id="pick-date">📅 Pick date</button>
+          <button class="ag-btn ag-btn-tonal" id="pick-time">⏰ Pick time</button>
+        </div>
+        <pre class="out" id="pick-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Toast &amp; haptics</h2>
+        <p class="ag-card-sub">Tap a chip to feel each haptic kind.</p>
+        <div class="ag-row" style="margin-bottom:12px">
+          <button class="ag-btn ag-btn-tonal" id="toast-short">Short toast</button>
+          <button class="ag-btn ag-btn-tonal" id="toast-long">Long toast</button>
+        </div>
+        <div class="ag-chips" id="haptics"></div>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Clipboard &amp; share</h2>
+        <p class="ag-card-sub">Paste needs the <b>clipboard</b> permission.</p>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-tonal" id="dev-copy">Copy</button>
+          <button class="ag-btn ag-btn-tonal" id="dev-paste">Paste</button>
+          <button class="ag-btn" id="dev-share">Share…</button>
+        </div>
+        <pre class="out" id="clip-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Notifications</h2>
+        <p class="ag-card-sub">Scheduled ones fire even when the app is closed.</p>
+        <div class="ag-row">
+          <button class="ag-btn" id="notify-now">Show now</button>
+          <button class="ag-btn ag-btn-tonal" id="notify-later">In 10 seconds</button>
+          <button class="ag-btn ag-btn-text" id="notify-cancel">Cancel</button>
+        </div>
+        <pre class="out" id="notify-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Files &amp; images</h2>
+        <p class="ag-card-sub"><code>&lt;input type=file&gt;</code> and <code>AntiGem.fs.pick</code> both open the native picker.</p>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-tonal" id="file-input-btn">input type=file</button>
+          <button class="ag-btn ag-btn-tonal" id="fs-pick">AntiGem.fs.pick</button>
+          <input type="file" accept="image/*" id="file-input" hidden>
+        </div>
+        <img class="preview" id="file-preview" alt="" hidden>
+        <pre class="out" id="file-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Navigation</h2>
+        <p class="ag-card-sub">Pages slide in natively. Back first closes the in-page panel (<code>AntiGem.onBack</code>).</p>
+        <div class="ag-row">
+          <button class="ag-btn" id="nav-push">Open detail page</button>
+          <button class="ag-btn ag-btn-tonal" id="panel-open">Open in-page panel</button>
+        </div>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Status bar</h2>
+        <p class="ag-card-sub">Icon contrast adjusts automatically.</p>
+        <div class="ag-chips" id="statusbar-chips"></div>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Device info</h2>
+        <button class="ag-btn ag-btn-tonal" id="device-info">Read device info</button>
+        <pre class="out" id="device-out" hidden></pre>
+      </div>
+    </section>
+
+    <!-- ======================= SYSTEM ======================= -->
+    <section class="tab" data-tab="system" data-title="System" hidden>
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🧵</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Threads</h2>
+            <p class="ag-card-sub">AntiGem.thread runs a function on other CPU cores. Each thread has native fetch, IndexedDB and files too.</p>
+          </div>
+        </div>
+        <div class="ag-row">
+          <button class="ag-btn ag-btn-sm" id="thread-bench">Count primes: 1 thread vs all cores</button>
+        </div>
+        <pre class="out" id="thread-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🔔</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Notifications</h2>
+            <p class="ag-card-sub">Native notifications with the app's own channels, colors, styles, live countdowns and buttons. Button presses come back as events.</p>
+          </div>
+        </div>
+        <div class="ag-row" style="flex-wrap:wrap;gap:8px">
+          <button class="ag-btn ag-btn-sm" id="nt-countdown">Countdown + buttons</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="nt-progress">Download progress</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="nt-chat">Chat + reply</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="nt-inbox">Inbox</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="nt-picture">Picture</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="nt-stopwatch">Stopwatch</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="nt-active">On screen</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="nt-clear">Clear all</button>
+        </div>
+        <pre class="out" id="nt-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">⏰</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Background &amp; reminders</h2>
+            <p class="ag-card-sub">Reminders and background tasks are kept natively: they survive closing the app and rebooting the phone. Task "check" runs <code>background.js</code> with the app closed.</p>
+          </div>
+        </div>
+        <div class="ag-row" style="flex-wrap:wrap;gap:8px">
+          <button class="ag-btn ag-btn-sm" id="bg-register">Task every 15 min</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="bg-run">Run task now</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="bg-list">Tasks &amp; runs</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="bg-cancel">Cancel task</button>
+          <button class="ag-btn ag-btn-sm" id="rem-add">Reminder in 1 min, then 3× every 15 min</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="rem-list">Reminders</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="rem-cancel">Cancel reminders</button>
+        </div>
+        <pre class="out" id="bg-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <div class="card-head">
+          <span class="card-icon">🍪</span>
+          <div class="ag-grow">
+            <h2 class="ag-card-title">Cookies</h2>
+            <p class="ag-card-sub">Each app has its own permanent cookie jar, sent like a native HTTP client does. Expired cookies are deleted.</p>
+          </div>
+        </div>
+        <div class="ag-row" style="flex-wrap:wrap;gap:8px">
+          <button class="ag-btn ag-btn-sm" id="ck-server">Server sets a cookie</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="ck-echo">What the server receives</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="ck-import">Import a pasted cookie</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="ck-list">List jar</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="ck-clear">Clear</button>
+        </div>
+        <pre class="out" id="ck-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Permissions</h2>
+        <p class="ag-card-sub">What this app declares in manifest.json, and what you have granted.</p>
+        <ul class="ag-list ag-plain" id="perm-list"></ul>
+      </div>
+
+      <div class="ag-card">
+        <div class="ag-row" style="margin-bottom:12px">
+          <h2 class="ag-card-title ag-grow" style="margin:0">Theme</h2>
+          <span class="ag-badge ag-badge-primary" id="theme-mode">light</span>
+        </div>
+        <p class="ag-card-sub">Live AntiGem theme colors, as <code>--ag-*</code> CSS variables. Change the theme in AntiGem and watch this update.</p>
+        <div class="swatches" id="swatches"></div>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">Console</h2>
+        <p class="ag-card-sub">Every log and error goes to the native console and to <code>console.log</code> in the app's data folder.</p>
+        <div class="ag-row" style="margin-bottom:8px">
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="log-log">log</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="log-warn">warn</button>
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="log-error">error</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="log-throw">throw</button>
+          <button class="ag-btn ag-btn-outlined ag-btn-sm" id="log-reject">reject</button>
+        </div>
+        <div class="ag-row">
+          <button class="ag-btn" id="open-console">Open console</button>
+          <button class="ag-btn ag-btn-tonal" id="open-devtools">DevTools</button>
+        </div>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">MCP tools</h2>
+        <p class="ag-card-sub">AntiGem's own tools, here <code>notes_mcp</code> (permission <code>mcp:notes_mcp</code>).</p>
+        <button class="ag-btn ag-btn-tonal" id="mcp-list">List notes_mcp tools</button>
+        <pre class="out" id="mcp-out" hidden></pre>
+      </div>
+
+      <div class="ag-card">
+        <h2 class="ag-card-title">App info</h2>
+        <pre class="out" id="app-info"></pre>
+        <div class="ag-card-actions">
+          <button class="ag-btn ag-btn-tonal" id="app-reload">Reload</button>
+          <button class="ag-btn ag-btn-text" id="app-close">Close app</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="ag-navbar">
+    <button class="ag-navbar-item is-active" data-tab="storage">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C7.58 3 4 4.79 4 7v10c0 2.21 3.59 4 8 4s8-1.79 8-4V7c0-2.21-3.58-4-8-4zm6 14c0 .5-2.13 2-6 2s-6-1.5-6-2v-2.23c1.61.78 3.72 1.23 6 1.23s4.39-.45 6-1.23V17zm0-4.55c-1.3.95-3.58 1.55-6 1.55s-4.7-.6-6-1.55V9.64c1.47.83 3.61 1.36 6 1.36s4.53-.53 6-1.36v2.81zM12 9C8.13 9 6 7.5 6 7s2.13-2 6-2 6 1.5 6 2-2.13 2-6 2z"/></svg></span>
+      <span class="ag-navbar-label">Storage</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="network">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95c-.32-1.25-.78-2.45-1.38-3.56 1.84.63 3.37 1.91 4.33 3.56zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56-1.84-.63-3.37-1.9-4.33-3.56zm2.95-8H5.08c.96-1.66 2.49-2.93 4.33-3.56C8.81 5.55 8.35 6.75 8.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95c-.96 1.65-2.49 2.93-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg></span>
+      <span class="ag-navbar-label">Network</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="native">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg></span>
+      <span class="ag-navbar-label">Native</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="system">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg></span>
+      <span class="ag-navbar-label">System</span>
+    </button>
+  </nav>
+</div>
+
+<!-- In-page panel: closed by the back gesture through AntiGem.onBack -->
+<div class="ag-scrim" id="scrim"></div>
+<div class="ag-sheet" id="panel" role="dialog" aria-label="In-page panel">
+  <h2 class="ag-title" style="margin-bottom:8px">In-page panel</h2>
+  <p class="ag-muted" style="margin:0 0 16px">This sheet is plain HTML. Press back (or swipe) and <code>AntiGem.onBack</code> closes it instead of leaving the app.</p>
+  <ul class="ag-list">
+    <li class="ag-item"><span class="ag-avatar">A</span><span class="ag-item-body"><span class="ag-item-title">Custom styled</span><span class="ag-item-sub">Built with the UI kit</span></span></li>
+    <li class="ag-item"><span class="ag-avatar">B</span><span class="ag-item-body"><span class="ag-item-title">Back-aware</span><span class="ag-item-sub">onBack returns true while open</span></span></li>
+  </ul>
+  <button class="ag-btn ag-btn-block" id="panel-close" style="margin-top:16px">Close</button>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

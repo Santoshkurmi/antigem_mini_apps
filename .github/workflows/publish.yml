@@ -1,0 +1,38 @@
+# Signs changed apps and updates the catalog when apps/ changes on main.
+# Optional: needs two repository secrets (Settings → Secrets and variables → Actions):
+#   AGAPP_KEY       the contents of your .agkey file (the backup from AntiGem: Mini Apps → key icon → Back up)
+#   AGAPP_PASSWORD  its password
+# Without them the job just stops; publish from your computer instead (see README.md).
+name: Publish mini apps
+on:
+  push:
+    branches: [main, master]
+    paths: ['apps/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sign and write the catalog
+        env:
+          AGAPP_KEY: ${{ secrets.AGAPP_KEY }}
+          AGAPP_PASSWORD: ${{ secrets.AGAPP_PASSWORD }}
+        run: |
+          if [ -z "$AGAPP_KEY" ] || [ -z "$AGAPP_PASSWORD" ]; then echo "No AGAPP_KEY / AGAPP_PASSWORD secrets: not publishing"; exit 0; fi
+          printf '%s' "$AGAPP_KEY" > "$RUNNER_TEMP/dev.agkey"
+          node tools/agapp.mjs publish --key "$RUNNER_TEMP/dev.agkey"
+          rm -f "$RUNNER_TEMP/dev.agkey"
+      - name: Commit the packages
+        run: |
+          git add dist antigem-mini-apps.json
+          if git diff --cached --quiet; then echo "Nothing new"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Publish mini apps"
+          git push

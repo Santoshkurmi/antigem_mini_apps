@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Habits</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar ag-large">
+    <span class="ag-grow"></span>
+    <h1 class="ag-appbar-title">
+      <span id="title">Today</span>
+      <span class="ag-appbar-sub" id="subtitle"></span>
+    </h1>
+  </header>
+
+  <main class="ag-content">
+    <!-- Today -->
+    <section class="tab" data-tab="today" data-title="Today">
+      <div class="ag-card ag-card-primary summary" id="summary">
+        <div class="ring-wrap">
+          <svg class="ring" viewBox="0 0 80 80" aria-hidden="true">
+            <circle class="track" cx="40" cy="40" r="34"/>
+            <circle class="bar" id="ring-bar" cx="40" cy="40" r="34"/>
+          </svg>
+          <span class="ring-label" id="ring-label">0/0</span>
+        </div>
+        <div class="ag-grow">
+          <div class="ag-title-m" id="summary-title">Let's get started</div>
+          <div class="ag-body-s summary-sub" id="summary-sub"></div>
+        </div>
+      </div>
+      <div class="habit-list" id="habit-list"></div>
+      <div class="ag-empty" id="empty" hidden>
+        <div class="ag-empty-icon">🌱</div>
+        <h2 class="ag-empty-title">Start your first habit</h2>
+        <p>Small things, every day. Add a habit and check it off each day to build a streak.</p>
+        <button class="ag-btn" id="empty-add">Add a habit</button>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section class="tab" data-tab="history" data-title="History" hidden>
+      <div class="stats">
+        <div class="stat"><b id="stat-week">0%</b><span>This week</span></div>
+        <div class="stat"><b id="stat-best">0</b><span>Best streak</span></div>
+        <div class="stat"><b id="stat-total">0</b><span>Check-ins</span></div>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Last 4 weeks</h2>
+        <p class="ag-card-sub">Darker days mean more habits done.</p>
+        <div class="heatmap" id="heatmap"></div>
+      </div>
+      <div class="ag-section">Streaks</div>
+      <ul class="ag-list" id="streak-list"></ul>
+    </section>
+
+    <!-- Settings -->
+    <section class="tab" data-tab="settings" data-title="Settings" hidden>
+      <div class="ag-section">Reminder</div>
+      <div class="ag-list">
+        <label class="ag-item">
+          <span class="ag-item-lead">🔔</span>
+          <span class="ag-item-body">
+            <span class="ag-item-title">Daily reminder</span>
+            <span class="ag-item-sub" id="reminder-sub">Off</span>
+          </span>
+          <input type="checkbox" class="ag-switch" id="reminder-on">
+        </label>
+        <button class="ag-item" id="reminder-time">
+          <span class="ag-item-lead">⏰</span>
+          <span class="ag-item-body">
+            <span class="ag-item-title">Reminder time</span>
+            <span class="ag-item-sub" id="reminder-time-sub">20:00</span>
+          </span>
+        </button>
+      </div>
+      <div class="ag-section">Data</div>
+      <div class="ag-list">
+        <button class="ag-item" id="reset-today">
+          <span class="ag-item-lead">↩️</span>
+          <span class="ag-item-body"><span class="ag-item-title">Uncheck today</span><span class="ag-item-sub">Clear today's check-ins</span></span>
+        </button>
+        <button class="ag-item danger" id="reset-all">
+          <span class="ag-item-lead">🗑️</span>
+          <span class="ag-item-body"><span class="ag-item-title">Delete all data</span><span class="ag-item-sub">Habits and history</span></span>
+        </button>
+      </div>
+      <p class="about ag-caption ag-muted" id="about"></p>
+    </section>
+  </main>
+
+  <button class="ag-fab ag-fab-extended" id="fab">
+    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    New habit
+  </button>
+
+  <nav class="ag-navbar">
+    <button class="ag-navbar-item is-active" data-tab="today">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></span>
+      <span class="ag-navbar-label">Today</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="history">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg></span>
+      <span class="ag-navbar-label">History</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="settings">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></span>
+      <span class="ag-navbar-label">Settings</span>
+    </button>
+  </nav>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

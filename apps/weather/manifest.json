@@ -1,0 +1,16 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.weather",
+  "name": "Sky",
+  "version": "1.0.0",
+  "description": "Weather forecast with hourly chart, 7 days, rain alerts in the background and a morning reminder.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#1565C0",
+  "background": "background.js",
+  "permissions": {
+    "network": { "hosts": ["api.open-meteo.com", "geocoding-api.open-meteo.com"] },
+    "notifications": true,
+    "background": true
+  }
+}

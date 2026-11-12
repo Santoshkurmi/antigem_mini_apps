@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Detail</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar ag-large">
+    <button class="ag-btn ag-btn-icon" id="back" aria-label="Back">
+      <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+    </button>
+    <span class="ag-grow"></span>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="close" aria-label="Close app">
+        <svg viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+    <h1 class="ag-appbar-title" id="title">Detail</h1>
+  </header>
+
+  <main class="ag-content">
+    <div class="ag-card ag-card-primary hero ag-enter">
+      <div class="ag-caption">Opened with AntiGem.nav.push</div>
+      <div class="ag-display" id="id-value">–</div>
+      <div class="ag-body-s">params.id from the page's query string</div>
+    </div>
+
+    <div class="ag-card ag-enter" style="animation-delay:40ms">
+      <h2 class="ag-card-title">Shared storage</h2>
+      <p class="ag-card-sub">This is a separate native page with its own WebView. The counter is the same native localStorage as the first page, so go back and it's already updated.</p>
+      <div class="counter">
+        <span class="ag-display" id="counter">0</span>
+        <button class="ag-btn" id="inc">+1</button>
+      </div>
+    </div>
+
+    <div class="ag-card ag-enter" style="animation-delay:80ms">
+      <h2 class="ag-card-title">AntiGem.page</h2>
+      <pre class="out" id="page-info"></pre>
+    </div>
+
+    <div class="ag-stack ag-enter" style="animation-delay:120ms">
+      <button class="ag-btn ag-btn-tonal ag-btn-block" id="push">Push another page</button>
+      <button class="ag-btn ag-btn-block" id="back-btn">Go back</button>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  const AG = window.AntiGem;
+  const id = Number(AG.page.params.id ?? 0);
+
+  document.getElementById('id-value').textContent = `#${id}`;
+  document.getElementById('title').textContent = `Detail ${id}`;
+  document.getElementById('page-info').textContent = JSON.stringify(AG.page, null, 2);
+
+  const counter = document.getElementById('counter');
+  const renderCounter = () => { counter.textContent = localStorage.getItem('counter') ?? '0'; };
+  renderCounter();
+  AG.on('storage', renderCounter);
+
+  document.getElementById('inc').addEventListener('click', () => {
+    localStorage.setItem('counter', String(Number(localStorage.getItem('counter') ?? 0) + 1));
+    AG.device.haptic('light');
+    renderCounter();
+  });
+  document.getElementById('push').addEventListener('click', () => AG.nav.push('detail.html', { id: id + 1 }));
+  document.getElementById('back').addEventListener('click', () => AG.nav.back());
+  document.getElementById('back-btn').addEventListener('click', () => AG.nav.back());
+  document.getElementById('close').addEventListener('click', () => AG.nav.close());
+</script>
+</body>
+</html>

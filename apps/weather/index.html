@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Sky</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <h1 class="ag-appbar-title ag-grow"><span id="title">Sky</span><span class="ag-appbar-sub" id="subtitle"></span></h1>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="btn-refresh" aria-label="Refresh">⟳</button>
+      <button class="ag-btn ag-btn-icon" id="btn-share" aria-label="Share">⤴</button>
+    </div>
+  </header>
+
+  <main class="ag-content">
+    <section class="tab" data-tab="now">
+      <div class="hero" id="hero">
+        <div class="hero-icon" id="cur-icon">⛅</div>
+        <div class="hero-temp" id="cur-temp">--°</div>
+        <div class="hero-desc" id="cur-desc">Add a city to start</div>
+        <div class="hero-meta" id="cur-meta"></div>
+        <span class="ag-badge ag-badge-warning" id="cached" hidden>cached</span>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Next 24 hours</h2>
+        <canvas id="chart" height="180"></canvas>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">7 days</h2>
+        <ul class="ag-list ag-plain" id="days"></ul>
+      </div>
+    </section>
+
+    <section class="tab" data-tab="cities" hidden>
+      <div class="ag-card">
+        <div class="ag-field"><input class="ag-input" id="search" placeholder="Search a city" autocomplete="off"></div>
+        <ul class="ag-list ag-plain" id="results"></ul>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Saved cities</h2>
+        <p class="ag-card-sub">The first one is used for rain alerts. Tap to show, long-press to remove.</p>
+        <ul class="ag-list ag-plain" id="saved"></ul>
+      </div>
+    </section>
+
+    <section class="tab" data-tab="settings" hidden>
+      <div class="ag-card">
+        <ul class="ag-list ag-plain">
+          <li class="ag-item ag-clickable" id="units-row">
+            <span class="ag-item-lead">🌡️</span>
+            <span class="ag-item-body"><span class="ag-item-title">Units</span><span class="ag-item-sub" id="units-sub"></span></span>
+          </li>
+          <li class="ag-item">
+            <span class="ag-item-lead">☀️</span>
+            <span class="ag-item-body"><span class="ag-item-title">Morning summary</span><span class="ag-item-sub">Every day at 07:00</span></span>
+            <input type="checkbox" class="ag-switch" id="morning">
+          </li>
+          <li class="ag-item">
+            <span class="ag-item-lead">🌧️</span>
+            <span class="ag-item-body"><span class="ag-item-title">Rain alerts</span><span class="ag-item-sub">Checks hourly in the background</span></span>
+            <input type="checkbox" class="ag-switch" id="rain">
+          </li>
+        </ul>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Background</h2>
+        <pre class="bg-out" id="bg-out">…</pre>
+        <div class="ag-card-actions">
+          <button class="ag-btn ag-btn-tonal ag-btn-sm" id="run-now">Run check now</button>
+          <button class="ag-btn ag-btn-text ag-btn-sm" id="bg-refresh">Refresh</button>
+        </div>
+      </div>
+      <p class="ag-caption ag-muted" style="text-align:center">Weather data: Open-Meteo.com</p>
+    </section>
+  </main>
+
+  <nav class="ag-navbar">
+    <button class="ag-navbar-item is-active" data-tab="now"><span class="ag-navbar-icon">☀️</span><span class="ag-navbar-label">Now</span></button>
+    <button class="ag-navbar-item" data-tab="cities"><span class="ag-navbar-icon">📍</span><span class="ag-navbar-label">Cities</span></button>
+    <button class="ag-navbar-item" data-tab="settings"><span class="ag-navbar-icon">⚙️</span><span class="ag-navbar-label">Settings</span></button>
+  </nav>
+</div>
+<script src="shared.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

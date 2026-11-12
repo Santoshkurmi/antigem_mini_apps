@@ -1,0 +1,32 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.notes",
+  "name": "Pocket Notes",
+  "version": "1.0.0",
+  "description": "Quick markdown notes with pins, reminders, search, sharing and export to your Documents folder.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#F9A825",
+  "permissions": {
+    "notifications": true,
+    "clipboard": true,
+    "storage": {
+      "folders": [
+        {
+          "path": "/sdcard/Documents/PocketNotes",
+          "access": "readwrite"
+        }
+      ]
+    }
+  },
+  "intents": [
+    {
+      "action": "share",
+      "types": [
+        "text/plain",
+        "text/uri-list",
+        "image/*"
+      ]
+    }
+  ]
+}

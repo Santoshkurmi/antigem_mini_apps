@@ -1,0 +1,4 @@
+# never commit your developer key: anyone with it (and its password) can publish updates as you
+*.agkey
+node_modules/
+.DS_Store

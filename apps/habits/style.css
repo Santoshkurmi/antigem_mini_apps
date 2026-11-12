@@ -1,0 +1,76 @@
+/* Habits: styles on top of /_antigem/ui.css */
+
+.tab { display: flex; flex-direction: column; gap: 12px; }
+
+/* Today summary ring */
+.summary { display: flex; align-items: center; gap: 20px; padding: 20px; }
+.summary-sub { opacity: .85; margin-top: 2px; }
+.ring-wrap { position: relative; width: 72px; height: 72px; flex-shrink: 0; color: var(--ag-primary, #6750A4); }
+.ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 8; stroke-linecap: round; }
+.ring .track { stroke: color-mix(in srgb, currentColor 20%, transparent); }
+.ring .bar { stroke: currentColor; transition: stroke-dashoffset .6s cubic-bezier(.2, 0, 0, 1); }
+.ring-label {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ag-on-primary-container, #21005D);
+}
+
+/* Habit cards */
+.habit-list { display: flex; flex-direction: column; gap: 8px; }
+.habit {
+  display: flex; align-items: center; gap: 4px; padding: 4px 8px 4px 4px; border-radius: 22px;
+  background: var(--ag-surface-container-low, #F7F2FA); transition: background-color .3s cubic-bezier(.2, 0, 0, 1);
+}
+.habit.is-done { background: color-mix(in srgb, var(--ag-primary, #6750A4) 14%, var(--ag-surface-container-low, #F7F2FA)); }
+.habit-main {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 14px; padding: 10px;
+  border: 0; border-radius: 18px; background: transparent; color: inherit; text-align: left;
+}
+.habit-emoji {
+  display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 48px; border-radius: 15px;
+  background: var(--ag-surface-container-highest, #E6E0E9); font-size: 26px; transition: transform .25s;
+}
+.habit.is-done .habit-emoji { background: var(--ag-surface, #FEF7FF); }
+.habit-body { flex: 1; min-width: 0; }
+.habit-name { display: block; font-size: 16px; line-height: 22px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.habit-meta { display: flex; align-items: center; gap: 10px; margin-top: 5px; font-size: 13px; line-height: 16px; color: var(--ag-on-surface-variant, #49454F); }
+.dots { display: inline-flex; gap: 4px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ag-outline-variant, #CAC4D0); transition: background-color .3s; }
+.dot.done { background: var(--ag-primary, #6750A4); }
+.dot.today { box-shadow: 0 0 0 2px var(--ag-surface-container-low, #F7F2FA), 0 0 0 3px var(--ag-primary, #6750A4); }
+
+.habit-check {
+  display: grid; place-items: center; flex-shrink: 0; width: 48px; height: 48px; border: 0; border-radius: 50%;
+  background: transparent; color: transparent; box-shadow: inset 0 0 0 2px var(--ag-outline, #79747E);
+  transition: background-color .2s, box-shadow .2s, color .2s, transform .15s;
+}
+.habit-check svg { width: 26px; height: 26px; transform: scale(.3); transition: transform .3s cubic-bezier(.34, 1.56, .64, 1); }
+.habit.is-done .habit-check { background: var(--ag-primary, #6750A4); color: var(--ag-on-primary, #fff); box-shadow: none; }
+.habit.is-done .habit-check svg { transform: scale(1); }
+.habit-check:active { transform: scale(.88); }
+.habit-check.pop { animation: pop .4s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes pop { 45% { transform: scale(1.2); } }
+
+/* History */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.stat { padding: 14px 8px; border-radius: 16px; background: var(--ag-surface-container-low, #F7F2FA); text-align: center; }
+.stat b { display: block; font-size: 26px; line-height: 32px; font-weight: 500; color: var(--ag-primary, #6750A4); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--ag-on-surface-variant, #49454F); }
+.heatmap { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.heat-label { padding-bottom: 2px; text-align: center; font-size: 11px; font-weight: 500; color: var(--ag-on-surface-variant, #49454F); }
+.heat {
+  display: grid; place-items: center; aspect-ratio: 1; border-radius: 10px; font-size: 11px; font-variant-numeric: tabular-nums;
+  background: var(--ag-surface-container-high, #ECE6F0); color: var(--ag-on-surface-variant, #49454F);
+  animation: ag-fade .3s linear both;
+}
+.heat.strong { color: var(--ag-on-primary, #fff); }
+.heat.today { box-shadow: inset 0 0 0 2px var(--ag-primary, #6750A4); }
+.heat.future { background: transparent; box-shadow: inset 0 0 0 1px var(--ag-outline-variant, #CAC4D0); opacity: .45; }
+
+/* Settings */
+.ag-item.danger .ag-item-title { color: var(--ag-error, #B3261E); }
+.about { text-align: center; margin: 16px 0 0; }
+
+/* FAB only on Today */
+.ag-fab { transition: transform .25s cubic-bezier(.2, 0, 0, 1), opacity .2s; }
+.ag-fab.is-hidden { transform: scale(.4); opacity: 0; pointer-events: none; }

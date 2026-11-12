@@ -1,0 +1,18 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.focus",
+  "name": "Focus",
+  "version": "1.0.0",
+  "description": "Pomodoro focus timer: a live countdown notification with Pause and Skip, tasks, history, streaks and reminders that fire even when the app is closed.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#C62828",
+  "permissions": {
+    "notifications": true,
+    "background": true
+  },
+  "required_permissions": [
+    "notifications"
+  ],
+  "background": "background.js"
+}

@@ -1,0 +1,20 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.gallery",
+  "name": "Gallery",
+  "version": "1.0.0",
+  "description": "Browse photos and videos on your phone. Native file access per folder, thumbnails streamed natively.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#6A1B9A",
+  "permissions": {
+    "storage": {
+      "folders": [
+        { "path": "/sdcard/DCIM", "access": "read" },
+        { "path": "/sdcard/Pictures", "access": "readwrite" }
+      ],
+      "pick": "read"
+    },
+    "camera": true
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "name": "AntiGem mini apps",
+  "format": 1,
+  "generated": "2026-11-12T07:27:37.552Z",
+  "apps": [
+    {
+      "path": "apps/devtools",
+      "id": "com.antigem.devtools",
+      "name": "Dev Toolbox",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "HTTP client, WebSocket tester, encoders and hashes, and AntiGem MCP tools in one place.",
+      "icon": "apps/devtools/icon.png",
+      "package": "dist/com.antigem.devtools-1.0.0.agapp",
+      "sha256": "f6c2e2552a7ba0a12131d1e24f73df2d575175b69736613f0979a5a7ba012003",
+      "size": 15127,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "network": {
+          "hosts": [
+            "*"
+          ]
+        },
+        "localhost": {
+          "ports": [
+            3000,
+            5173,
+            8000,
+            8080
+          ]
+        },
+        "clipboard": true,
+        "mcp": {
+          "notes_mcp": {
+            "tools": "*",
+            "ask": true
+          }
+        }
+      },
+      "updated": "2026-11-12T07:27:37.514Z"
+    },
+    {
+      "path": "apps/explorer",
+      "id": "com.antigem.explorer",
+      "name": "Explorer",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Wikipedia, dictionary, currency rates, countries and Hacker News: free APIs, no keys, through AntiGem's native network.",
+      "icon": "apps/explorer/icon.png",
+      "package": "dist/com.antigem.explorer-1.0.0.agapp",
+      "sha256": "dd6a08e02cdc85de0f24d4cfd976502f68049cd4d72f3b6dbef2b97a194d7eab",
+      "size": 21263,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "network": {
+          "hosts": [
+            "en.wikipedia.org",
+            "upload.wikimedia.org",
+            "api.dictionaryapi.dev",
+            "ssl.gstatic.com",
+            "open.er-api.com",
+            "countriesnow.space",
+            "flagcdn.com",
+            "hacker-news.firebaseio.com",
+            "thumb.wikimedia.org"
+          ]
+        },
+        "notifications": true,
+        "background": true
+      },
+      "updated": "2026-11-12T07:27:37.526Z"
+    },
+    {
+      "path": "apps/focus",
+      "id": "com.antigem.focus",
+      "name": "Focus",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Pomodoro focus timer: a live countdown notification with Pause and Skip, tasks, history, streaks and reminders that fire even when the app is closed.",
+      "icon": "apps/focus/icon.png",
+      "package": "dist/com.antigem.focus-1.0.0.agapp",
+      "sha256": "4f16e0d5f6f546a487d4404df55ec5b7303080e970c8aec5bde63ec81d945753",
+      "size": 21852,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "notifications": true,
+        "background": true
+      },
+      "updated": "2026-11-12T07:27:37.530Z"
+    },
+    {
+      "path": "apps/gallery",
+      "id": "com.antigem.gallery",
+      "name": "Gallery",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Browse photos and videos on your phone. Native file access per folder, thumbnails streamed natively.",
+      "icon": "apps/gallery/icon.png",
+      "package": "dist/com.antigem.gallery-1.0.0.agapp",
+      "sha256": "697cb3adc0ccac0957ecc0a78369bfefb01e6108f96bd18dd715ba003a34e52b",
+      "size": 12807,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "storage": {
+          "folders": [
+            {
+              "path": "/sdcard/DCIM",
+              "access": "read"
+            },
+            {
+              "path": "/sdcard/Pictures",
+              "access": "readwrite"
+            }
+          ],
+          "pick": "read"
+        },
+        "camera": true
+      },
+      "updated": "2026-11-12T07:27:37.534Z"
+    },
+    {
+      "path": "apps/habits",
+      "id": "com.antigem.habits",
+      "name": "Habits",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Daily habit tracker with streaks, a 4-week history and a daily reminder.",
+      "icon": "apps/habits/icon.png",
+      "package": "dist/com.antigem.habits-1.0.0.agapp",
+      "sha256": "088e543fca932cbf32a006fb5e02f87b5e48ed35fcf0ad38b377049f5dff5891",
+      "size": 15758,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "notifications": true
+      },
+      "updated": "2026-11-12T07:27:37.538Z"
+    },
+    {
+      "path": "apps/notes",
+      "id": "com.antigem.notes",
+      "name": "Pocket Notes",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Quick markdown notes with pins, reminders, search, sharing and export to your Documents folder.",
+      "icon": "apps/notes/icon.png",
+      "package": "dist/com.antigem.notes-1.0.0.agapp",
+      "sha256": "4d9a41ec9e1e930951cebb9629cbda9d265070da51dd5e0f94e74dad931a5f68",
+      "size": 16263,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "notifications": true,
+        "clipboard": true,
+        "storage": {
+          "folders": [
+            {
+              "path": "/sdcard/Documents/PocketNotes",
+              "access": "readwrite"
+            }
+          ]
+        }
+      },
+      "updated": "2026-11-12T07:27:37.541Z"
+    },
+    {
+      "path": "apps/showcase",
+      "id": "com.antigem.showcase",
+      "name": "Showcase",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Tries every Mini Apps feature: native storage, IndexedDB, files, network, cookies, native UI, notifications, reminders, background tasks, threads, permissions, theme and console.",
+      "icon": "apps/showcase/icon.png",
+      "package": "dist/com.antigem.showcase-1.0.0.agapp",
+      "sha256": "54acce9a6690f94f2af955f97ee2b5d77e71e5ccc2999e2ce92f006a1cb5213f",
+      "size": 25796,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "network": {
+          "hosts": [
+            "api.github.com",
+            "httpbin.org",
+            "ws.postman-echo.com",
+            "picsum.photos",
+            "*.picsum.photos",
+            "fastly.picsum.photos"
+          ]
+        },
+        "localhost": {
+          "ports": [
+            8080
+          ]
+        },
+        "storage": {
+          "folders": [
+            {
+              "path": "/sdcard/Download",
+              "access": "read"
+            },
+            {
+              "path": "/sdcard/Documents/Showcase",
+              "access": "readwrite"
+            }
+          ],
+          "pick": "read"
+        },
+        "notifications": true,
+        "background": true,
+        "clipboard": true,
+        "camera": true,
+        "mcp": {
+          "notes_mcp": "read"
+        }
+      },
+      "updated": "2026-11-12T07:27:37.549Z"
+    },
+    {
+      "path": "apps/weather",
+      "id": "com.antigem.weather",
+      "name": "Sky",
+      "version": "1.0.0",
+      "version_code": 1000000,
+      "description": "Weather forecast with hourly chart, 7 days, rain alerts in the background and a morning reminder.",
+      "icon": "apps/weather/icon.png",
+      "package": "dist/com.antigem.weather-1.0.0.agapp",
+      "sha256": "56969477f75c9d2cfd31e01ac2b103d44570690c8f231e9faea5cc8028e4839a",
+      "size": 13590,
+      "developer": "Santosh Kurmi",
+      "fingerprint": "57b8a7a0466f5dda67b1082e15305d5e3f3156e10ee9e9d0f7af6a505af53bed",
+      "permissions": {
+        "network": {
+          "hosts": [
+            "api.open-meteo.com",
+            "geocoding-api.open-meteo.com"
+          ]
+        },
+        "notifications": true,
+        "background": true
+      },
+      "updated": "2026-11-12T07:27:37.552Z"
+    }
+  ]
+}

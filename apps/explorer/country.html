@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Country</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 20px; box-shadow: 0 0 0 1px var(--ag-outline-variant, #ddd); background: var(--ag-surface-container, #eee); }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .fact { padding: 12px 14px; border-radius: 16px; background: var(--ag-surface-container-low, #f4f4f4); }
+    .fact b { display: block; font-size: 18px; margin-top: 2px; }
+    .fact span { font-size: 12px; color: var(--ag-on-surface-variant, #666); text-transform: uppercase; letter-spacing: .5px; }
+    .cities { display: flex; flex-wrap: wrap; gap: 6px; }
+  </style>
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <button class="ag-btn-icon" id="back" aria-label="Back">←</button>
+    <div class="ag-appbar-title" id="title">Country</div>
+    <div class="ag-appbar-actions"><button class="ag-btn-icon" id="share" aria-label="Share">📤</button></div>
+  </header>
+  <main class="ag-content" id="body"></main>
+</div>
+<script src="common.js"></script>
+<script src="country.js"></script>
+</body>
+</html>

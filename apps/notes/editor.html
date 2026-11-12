@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Note</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <button class="ag-btn ag-btn-icon" id="back" aria-label="Back">←</button>
+    <h1 class="ag-appbar-title"><span id="status">Saved</span></h1>
+    <span class="ag-grow"></span>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="mode" aria-label="Preview">👁</button>
+      <button class="ag-btn ag-btn-icon" id="more" aria-label="More">⋮</button>
+    </div>
+  </header>
+  <main class="ag-content editor-main">
+    <div class="meta" id="meta"></div>
+    <textarea class="note-text ag-selectable" id="text" placeholder="Title&#10;&#10;Write something… (# heading, **bold**, - list, - [ ] task)"></textarea>
+    <article class="md ag-selectable" id="preview" hidden></article>
+    <div class="images" id="images"></div>
+    <div class="toolbar">
+      <button class="ag-btn ag-btn-tonal ag-btn-sm" data-ins="# ">H</button>
+      <button class="ag-btn ag-btn-tonal ag-btn-sm" data-wrap="**">B</button>
+      <button class="ag-btn ag-btn-tonal ag-btn-sm" data-ins="- ">• List</button>
+      <button class="ag-btn ag-btn-tonal ag-btn-sm" data-ins="- [ ] ">☐ Task</button>
+      <button class="ag-btn ag-btn-tonal ag-btn-sm" id="img">🖼 Image</button>
+      <button class="ag-btn ag-btn-tonal ag-btn-sm" id="paste">📋 Paste</button>
+    </div>
+  </main>
+</div>
+<script src="db.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>

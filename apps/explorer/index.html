@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Explorer</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <div class="ag-appbar-title" id="title">Wikipedia</div>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn-icon" id="refresh" aria-label="Refresh">⟳</button>
+    </div>
+  </header>
+
+  <main class="ag-content">
+    <!-- Wiki -->
+    <section class="tab" data-tab="wiki" data-title="Wikipedia">
+      <div class="search-row">
+        <input class="ag-input" id="wiki-q" type="search" placeholder="Search Wikipedia" autocomplete="off">
+        <button class="ag-btn ag-btn-tonal" id="wiki-random">🎲 Random</button>
+      </div>
+      <ul class="ag-list ag-divided" id="wiki-results"></ul>
+      <div id="wiki-article"></div>
+      <h3 class="ag-section">Bookmarks</h3>
+      <ul class="ag-list ag-divided" id="wiki-bookmarks"></ul>
+    </section>
+
+    <!-- Dictionary -->
+    <section class="tab" data-tab="dict" data-title="Dictionary" hidden>
+      <form class="search-row" id="dict-form">
+        <input class="ag-input" id="dict-q" type="search" placeholder="Look up an English word" autocomplete="off" autocapitalize="none">
+        <button class="ag-btn" type="submit">Define</button>
+      </form>
+      <div id="dict-out"></div>
+      <h3 class="ag-section">Recent</h3>
+      <div class="ag-chips" id="dict-recent"></div>
+    </section>
+
+    <!-- Currency -->
+    <section class="tab" data-tab="fx" data-title="Currency" hidden>
+      <div class="ag-card">
+        <div class="fx-row">
+          <input class="ag-input fx-amount" id="fx-amount" type="number" inputmode="decimal" value="1">
+          <button class="ag-btn ag-btn-tonal fx-cur" id="fx-from">USD</button>
+        </div>
+        <button class="ag-btn ag-btn-text fx-swap" id="fx-swap">⇅ Swap</button>
+        <div class="fx-row">
+          <div class="fx-result" id="fx-result">–</div>
+          <button class="ag-btn ag-btn-tonal fx-cur" id="fx-to">EUR</button>
+        </div>
+        <p class="ag-card-sub" id="fx-status"></p>
+      </div>
+      <h3 class="ag-section">Popular from <span id="fx-base-label">USD</span></h3>
+      <ul class="ag-list ag-divided" id="fx-popular"></ul>
+    </section>
+
+    <!-- Countries -->
+    <section class="tab" data-tab="countries" data-title="Countries" hidden>
+      <div class="search-row">
+        <input class="ag-input" id="c-q" type="search" placeholder="Filter countries" autocomplete="off">
+        <button class="ag-btn ag-btn-tonal" id="c-sort">↕ Name</button>
+      </div>
+      <p class="ag-caption" id="c-status"></p>
+      <ul class="ag-list ag-divided" id="c-list"></ul>
+    </section>
+
+    <!-- News -->
+    <section class="tab" data-tab="news" data-title="Hacker News" hidden>
+      <div class="ag-card ag-card-filled">
+        <div class="ag-row">
+          <div class="ag-grow">
+            <div class="ag-card-title">Hourly digest</div>
+            <div class="ag-card-sub" id="hn-bg-status">A background task notifies you when the #1 story changes.</div>
+          </div>
+          <input type="checkbox" class="ag-switch" id="hn-bg-toggle">
+        </div>
+        <div class="ag-card-actions"><button class="ag-btn ag-btn-sm ag-btn-text" id="hn-bg-run">Run check now</button></div>
+      </div>
+      <ul class="ag-list ag-divided" id="hn-list"></ul>
+    </section>
+  </main>
+
+  <nav class="ag-navbar">
+    <button class="ag-navbar-item is-active" data-tab="wiki"><span class="ag-navbar-icon">📖</span><span class="ag-navbar-label">Wiki</span></button>
+    <button class="ag-navbar-item" data-tab="dict"><span class="ag-navbar-icon">🔤</span><span class="ag-navbar-label">Words</span></button>
+    <button class="ag-navbar-item" data-tab="fx"><span class="ag-navbar-icon">💱</span><span class="ag-navbar-label">Currency</span></button>
+    <button class="ag-navbar-item" data-tab="countries"><span class="ag-navbar-icon">🌍</span><span class="ag-navbar-label">Countries</span></button>
+    <button class="ag-navbar-item" data-tab="news"><span class="ag-navbar-icon">📰</span><span class="ag-navbar-label">News</span></button>
+  </nav>
+</div>
+<script src="common.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

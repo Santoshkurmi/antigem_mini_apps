@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Focus</title>
+<link rel="stylesheet" href="/_antigem/ui.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <h1 class="ag-appbar-title" id="title">Focus</h1>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="open-settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M19.14 12.94a7.07 7.07 0 000-1.88l2.03-1.58a.5.5 0 00.12-.64l-1.92-3.32a.5.5 0 00-.6-.22l-2.39.96a7 7 0 00-1.63-.94l-.36-2.54A.5.5 0 0013.9 2h-3.84a.5.5 0 00-.5.42l-.36 2.54c-.59.24-1.13.56-1.63.94l-2.39-.96a.5.5 0 00-.6.22L2.66 8.48a.5.5 0 00.12.64l2.03 1.58a7.07 7.07 0 000 1.88l-2.03 1.58a.5.5 0 00-.12.64l1.92 3.32c.13.22.39.3.6.22l2.39-.96c.5.38 1.04.7 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.25 0 .45-.18.5-.42l.36-2.54c.59-.24 1.13-.56 1.63-.94l2.39.96c.22.08.47 0 .6-.22l1.92-3.32a.5.5 0 00-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1112 8.5a3.5 3.5 0 010 7z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="ag-content">
+    <section class="tab" data-tab="timer">
+      <div class="ag-segmented" id="modes">
+        <button data-mode="focus" class="is-active">Focus</button>
+        <button data-mode="short">Short break</button>
+        <button data-mode="long">Long break</button>
+      </div>
+      <div class="timer">
+        <div class="ring">
+          <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="54" fill="none" stroke-width="7"/><circle class="bar" id="bar" cx="60" cy="60" r="54" fill="none" stroke-width="7" stroke-dasharray="339.29" stroke-dashoffset="0"/></svg>
+          <div class="center"><div class="time" id="time">25:00</div><div class="phase" id="phase">Focus</div></div>
+        </div>
+        <button class="ag-chip task-pick" id="task-pick">🎯 <span id="task-name">No task</span></button>
+        <div class="controls">
+          <button class="ag-btn ag-btn-icon ag-btn-tonal" id="reset" aria-label="Reset"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 5V1L7 6l5 5V7a5 5 0 11-5 5H5a7 7 0 107-7z"/></svg></button>
+          <button class="ag-btn ag-btn-filled main" id="start">Start</button>
+          <button class="ag-btn ag-btn-icon ag-btn-tonal" id="skip" aria-label="Skip"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6 18l8.5-6L6 6v12zm10-12v12h2V6h-2z"/></svg></button>
+        </div>
+        <div class="goal" id="goal"></div>
+        <div class="ag-caption ag-muted" id="goal-text"></div>
+      </div>
+    </section>
+
+    <section class="tab" data-tab="tasks" hidden>
+      <div class="ag-card">
+        <div class="ag-row">
+          <input class="ag-input ag-grow" id="task-input" placeholder="New task">
+          <button class="ag-btn ag-btn-filled" id="task-add">Add</button>
+        </div>
+      </div>
+      <ul class="ag-list" id="task-list"></ul>
+      <div class="ag-empty" id="task-empty" hidden><div class="ag-empty-icon">📝</div><div class="ag-empty-title">No tasks yet</div><p class="ag-muted">Add what you want to work on, then pick it on the timer.</p></div>
+    </section>
+
+    <section class="tab" data-tab="history" hidden>
+      <div class="ag-card">
+        <div class="stats">
+          <div><b id="st-today">0</b><span>today</span></div>
+          <div><b id="st-week">0</b><span>this week</span></div>
+          <div><b id="st-streak">0</b><span>day streak 🔥</span></div>
+        </div>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Focus minutes, last 7 days</h2>
+        <canvas class="chart" id="chart"></canvas>
+      </div>
+      <div class="ag-card">
+        <h2 class="ag-card-title">Plan my day</h2>
+        <p class="ag-card-sub">A weekday reminder to plan your focus sessions. It fires even with the app closed.</p>
+        <div class="ag-row">
+          <span class="ag-grow" id="plan-text">Off</span>
+          <button class="ag-btn ag-btn-tonal" id="plan-set">Set time</button>
+          <button class="ag-btn ag-btn-text" id="plan-off">Off</button>
+        </div>
+      </div>
+      <h2 class="ag-section">Recent sessions</h2>
+      <ul class="ag-list" id="hist-list"></ul>
+    </section>
+  </main>
+
+  <nav class="ag-navbar">
+    <button class="ag-navbar-item is-active" data-tab="timer">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42A8.96 8.96 0 0012 4a9 9 0 109 9c0-2.12-.74-4.07-1.97-5.61zM12 20a7 7 0 110-14 7 7 0 010 14z"/></svg></span>
+      <span class="ag-navbar-label">Timer</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="tasks">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg></span>
+      <span class="ag-navbar-label">Tasks</span>
+    </button>
+    <button class="ag-navbar-item" data-tab="history">
+      <span class="ag-navbar-icon"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg></span>
+      <span class="ag-navbar-label">History</span>
+    </button>
+  </nav>
+</div>
+<script src="db.js"></script>
+<script src="timer-notify.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Focus settings</title>
+<link rel="stylesheet" href="/_antigem/ui.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <button class="ag-btn ag-btn-icon" id="back" aria-label="Back"><svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
+    <h1 class="ag-appbar-title">Settings</h1>
+  </header>
+  <main class="ag-content">
+    <h2 class="ag-section">Timer</h2>
+    <ul class="ag-list" id="durations"></ul>
+    <h2 class="ag-section">Feedback</h2>
+    <ul class="ag-list">
+      <li class="ag-item">
+        <span class="ag-item-lead">🔔</span>
+        <span class="ag-item-body"><span class="ag-item-title">Sounds</span><span class="ag-item-sub">Beep when a phase ends</span></span>
+        <span class="ag-item-trail"><input type="checkbox" class="ag-switch" id="sound"></span>
+      </li>
+      <li class="ag-item ag-clickable" id="test-sound">
+        <span class="ag-item-lead">🔊</span>
+        <span class="ag-item-body"><span class="ag-item-title">Test sound</span></span>
+      </li>
+    </ul>
+    <h2 class="ag-section">Data</h2>
+    <ul class="ag-list">
+      <li class="ag-item ag-clickable" id="export">
+        <span class="ag-item-lead">📤</span>
+        <span class="ag-item-body"><span class="ag-item-title">Export history</span><span class="ag-item-sub">Saves data/history.json and shares it</span></span>
+      </li>
+      <li class="ag-item ag-clickable" id="clear">
+        <span class="ag-item-lead">🗑</span>
+        <span class="ag-item-body"><span class="ag-item-title" style="color:var(--ag-error,#b3261e)">Clear history</span></span>
+      </li>
+    </ul>
+    <p class="ag-caption ag-muted" id="about" style="text-align:center;margin-top:24px"></p>
+  </main>
+</div>
+<script src="db.js"></script>
+<script src="settings.js"></script>
+</body>
+</html>

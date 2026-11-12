@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pocket Notes</title>
+  <link rel="stylesheet" href="/_antigem/ui.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ag-page">
+  <header class="ag-appbar">
+    <h1 class="ag-appbar-title">Pocket Notes<span class="ag-appbar-sub" id="count"></span></h1>
+    <span class="ag-grow"></span>
+    <div class="ag-appbar-actions">
+      <button class="ag-btn ag-btn-icon" id="menu" aria-label="More">⋮</button>
+    </div>
+  </header>
+  <main class="ag-content">
+    <div class="ag-field search">
+      <input class="ag-input" id="q" placeholder="Search notes" autocomplete="off">
+    </div>
+    <div class="ag-chips" id="filters">
+      <button class="ag-chip is-selected" data-f="all">All</button>
+      <button class="ag-chip" data-f="pinned">📌 Pinned</button>
+      <button class="ag-chip" data-f="reminders">⏰ Reminders</button>
+      <button class="ag-chip" data-f="archived">🗄 Archived</button>
+    </div>
+    <div class="grid" id="list"></div>
+    <div class="ag-empty" id="empty" hidden>
+      <div class="ag-empty-icon">📝</div>
+      <h2 class="ag-empty-title" id="empty-title">No notes yet</h2>
+      <p id="empty-sub">Tap “New note” to write your first one. Markdown works: # headings, **bold**, - lists, - [ ] tasks.</p>
+    </div>
+  </main>
+  <button class="ag-fab ag-fab-extended" id="new"><span>＋</span> New note</button>
+</div>
+<script src="db.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

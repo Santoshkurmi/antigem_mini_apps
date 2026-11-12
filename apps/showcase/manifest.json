@@ -1,0 +1,46 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.showcase",
+  "name": "Showcase",
+  "version": "1.0.0",
+  "description": "Tries every Mini Apps feature: native storage, IndexedDB, files, network, cookies, native UI, notifications, reminders, background tasks, threads, permissions, theme and console.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#6750A4",
+  "background": "background.js",
+  "permissions": {
+    "network": {
+      "hosts": [
+        "api.github.com",
+        "httpbin.org",
+        "ws.postman-echo.com",
+        "picsum.photos",
+        "*.picsum.photos",
+        "fastly.picsum.photos"
+      ]
+    },
+    "localhost": {
+      "ports": [
+        8080
+      ]
+    },
+    "storage": {
+      "folders": [
+        {
+          "path": "/sdcard/Download",
+          "access": "read"
+        },
+        {
+          "path": "/sdcard/Documents/Showcase",
+          "access": "readwrite"
+        }
+      ],
+      "pick": "read"
+    },
+    "notifications": true,
+    "background": true,
+    "clipboard": true,
+    "camera": true,
+    "mcp": { "notes_mcp": "read" }
+  }
+}

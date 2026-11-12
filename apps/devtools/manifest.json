@@ -1,0 +1,16 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.devtools",
+  "name": "Dev Toolbox",
+  "version": "1.0.0",
+  "description": "HTTP client, WebSocket tester, encoders and hashes, and AntiGem MCP tools in one place.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#263238",
+  "permissions": {
+    "network": { "hosts": ["*"] },
+    "localhost": { "ports": [3000, 5173, 8000, 8080] },
+    "clipboard": true,
+    "mcp": { "notes_mcp": { "tools": "*", "ask": true } }
+  }
+}
