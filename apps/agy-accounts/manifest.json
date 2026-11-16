@@ -1,0 +1,17 @@
+{
+  "manifest_version": 1,
+  "id": "com.antigem.agyaccounts",
+  "name": "Agy Accounts",
+  "version": "1.0.0",
+  "description": "Save your Antigravity (agy) logins and switch between them.",
+  "entry": "index.html",
+  "icon": "icon.png",
+  "theme_color": "#1A73E8",
+  "permissions": {
+    "storage": {
+      "folders": [
+        { "path": "~/.gemini", "access": "readwrite" }
+      ]
+    }
+  }
+}
